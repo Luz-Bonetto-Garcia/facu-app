@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracker de Carrera</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-top">
+      <h1>🎓 Mi Progresión de Carrera</h1>
+      <div class="header-actions">
+        <button id="btn-theme-toggle" class="btn-theme" title="Cambiar Modo Oscuro/Claro">🌙</button>
+        <button id="btn-exportar" class="btn-secundario" title="Exportar Resumen a PDF">📄 Exportar a PDF</button>
+      </div>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <span class="metric-label">Avance de Carrera</span>
+        <span id="porcentaje-texto" class="metric-value">0%</span>
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label">Promedio Analítico</span>
+        <span id="promedio-analitico" class="metric-value">-</span>
+        <small id="total-intentos-texto">0 exámenes computados</small>
+      </div>
+    </div>
+
+    <!-- Barra de búsqueda y filtros -->
+    <div class="controles-busqueda">
+      <input type="text" id="input-buscar" placeholder="🔍 Buscar materia..." class="input-buscar">
+      <div class="filtros-estados">
+        <button class="btn-filtro activo" data-filtro="todos">Todas</button>
+        <button class="btn-filtro" data-filtro="aprobada">Aprobadas</button>
+        <button class="btn-filtro" data-filtro="regular">Regulares</button>
+        <button class="btn-filtro" data-filtro="habilitada">Habilitadas</button>
+        <button class="btn-filtro" data-filtro="bloqueada">Bloqueadas</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="carrera-container" class="carrera-container">
+    <!-- Se carga dinámicamente -->
+  </main>
+
+  <!-- Modal para cargar parciales, laboratorios, recursados y finales -->
+  <div id="modal-materia" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modal-titulo">Nombre Materia</h2>
+      
+      <div class="seccion-cursada">
+        <h3>Historial de Cursadas</h3>
+        <div class="cursada-info">
+          <label for="numero-cursada">N° de Cursada:</label>
+          <input type="number" id="numero-cursada" min="1" value="1">
+        </div>
+
+        <h4>Parciales (Teórico - Práctico)</h4>
+        <div id="lista-parciales"></div>
+        <button id="btn-agregar-parcial" class="btn-secundario">+ Agregar Parcial T/P</button>
+
+        <h4 style="margin-top: 15px;">Laboratorios / Prácticos de Máquina</h4>
+        <div id="lista-laboratorios"></div>
+        <button id="btn-agregar-lab" class="btn-secundario">+ Agregar Laboratorio</button>
+      </div>
+
+      <div class="seccion-condicion">
+        <h3>Condición al Finalizar el Cuatrimestre</h3>
+        <label for="select-condicion">Estado:</label>
+        <select id="select-condicion" class="select-input">
+          <option value="pendiente">Pendiente / Cursando</option>
+          <option value="regular">Regular</option>
+          <option value="promocionado">Promocionado</option>
+          <option value="libre">Libre</option>
+        </select>
+      </div>
+
+      <div class="seccion-finales">
+        <h3>Historial de Exámenes Finales (Analítico)</h3>
+        <p class="ayuda-texto">Ingresá todas las notas obtenidas en finales (incluidos aplazos):</p>
+        <div id="lista-finales"></div>
+        <button id="btn-agregar-final" class="btn-secundario">+ Agregar Intento de Final</button>
+      </div>
+
+      <div class="modal-acciones">
+        <button id="btn-guardar-cursando" class="btn-primario">Guardar Parciales (Cursando)</button>
+        <button id="btn-aprobar" class="btn-exito">Aprobar Materia</button>
+        <button id="btn-desaprobar" class="btn-peligro">Limpiar / Pendiente</button>
+        <button id="btn-cerrar" class="btn-cancelar">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
